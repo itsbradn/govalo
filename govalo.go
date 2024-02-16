@@ -1,8 +1,8 @@
 package govalo
 
 import (
-	"github.com/itsbradn/govalo/pkg/api"
-	"github.com/itsbradn/govalo/pkg/auth"
+	"github.com/itsbradn/govalo/internal/api"
+	"github.com/itsbradn/govalo/internal/auth"
 	"github.com/itsbradn/govalo/pkg/conf"
 )
 
