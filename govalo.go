@@ -6,46 +6,61 @@ import (
 	"github.com/itsbradn/govalo/pkg/conf"
 )
 
-func Setup(region, username, password string) (string, error) {
+type GoValoAPI struct {
+	Region string `json:"region"`
+	PUUID  string
+}
+
+func (vapi *GoValoAPI) GetUserInfo() (*api.UserInfoResponseBody, error) {
+	return api.GetUserInfo()
+}
+
+func (vapi *GoValoAPI) GetSelfNameService() (*api.NameServiceResponseBody, error) {
+	return api.GetNameService(vapi.Region, vapi.PUUID)
+}
+
+func (vapi *GoValoAPI) GetNameService(uuid string) (*api.NameServiceResponseBody, error) {
+	return api.GetNameService(vapi.Region, uuid)
+}
+
+func Setup(region, username, password string) (*GoValoAPI, error) {
 	platform, err := conf.GetClientPlatformEncoded()
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	conf.AddAuthHeaders("X-Riot-ClientPlatform", platform)
 
 	cookie, err := auth.GetAuthCookies()
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	conf.AddAuthHeaders("Cookie", cookie)
 
 	tokens, cookie, err := auth.Login(username, password)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	conf.AddAuthHeaders("Cookie", cookie)
-	conf.AddAuthHeaders("Authorization", "Bearer " + tokens.AccessToken)
-	
+	conf.AddAuthHeaders("Authorization", "Bearer "+tokens.AccessToken)
+
 	token, err := auth.GetEntitlementToken()
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	conf.AddAuthHeaders("X-Riot-Entitlements-JWT", token)
 	conf.AddAuthHeaders("X-Riot-ClientVersion", "release-08.02-shipping-9-2265102")
 
-	entitlements, err := auth.GetEntitlementsFromToken(token)
+	userinfo, err := api.GetUserInfo()
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	name, err := api.GetNameService(region, entitlements.Subject)
-	if err != nil {
-		return "", err
-	}
-
-	return name.GameName + "#" + name.TagLine, nil
+	return &GoValoAPI{
+		PUUID:  userinfo.PlayerUUID,
+		Region: region,
+	}, nil
 }
