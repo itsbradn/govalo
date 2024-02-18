@@ -23,6 +23,14 @@ func (vapi *GoValoAPI) GetNameService(uuid string) (*api.NameServiceResponseBody
 	return api.GetNameService(vapi.Region, uuid)
 }
 
+func (vapi *GoValoAPI) GetMatchHistory(uuid string, options *api.MatchHistoryOptions) (*api.MatchHistoryResponseBody, error) {
+	return api.GetMatchHistory(vapi.Region, uuid, options)
+}
+
+func (vapi *GoValoAPI) GetMatchDetails(uuid string) (*api.MatchDetailsResponseBody, error) {
+	return api.GetMatchDetails(vapi.Region, uuid)
+}
+
 func Setup(region, username, password string) (*GoValoAPI, error) {
 	platform, err := conf.GetClientPlatformEncoded()
 	if err != nil {
