@@ -23,7 +23,9 @@ func (vapi *GoValoAPI) GetNameService(uuid string) (*api.NameServiceResponseBody
 	return api.GetNameService(vapi.Region, uuid)
 }
 
-func (vapi *GoValoAPI) GetMatchHistory(uuid string, options *api.MatchHistoryOptions) (*api.MatchHistoryResponseBody, error) {
+type MatchHistoryOptions = api.MatchHistoryOptions
+
+func (vapi *GoValoAPI) GetMatchHistory(uuid string, options *MatchHistoryOptions) (*api.MatchHistoryResponseBody, error) {
 	return api.GetMatchHistory(vapi.Region, uuid, options)
 }
 
