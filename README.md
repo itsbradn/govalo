@@ -1,36 +1,76 @@
-POC Valorant Client API Wrapper written in Go.
+<p align="center">
+	<h1 align="center">GoValo</h1>
+	<p align="center">
+		<b>GoValo</b> is a Valorant Client API library built for go. Designed for simplicity and ease of use you can get up in running in a few lines of code.
+	</p>
+</p>
+
+<p align="center">
+	<a aria-label="Package License" href="https://pkg.go.dev/github.com/itsbradn/govalo">
+		<img alt="" src="https://img.shields.io/github/license/itsbradn/govalo?style=for-the-badge&labelColor=000000">
+	</a>
+	<a aria-label="Package Version" href="https://pkg.go.dev/github.com/itsbradn/govalo">
+		<img alt="" src="https://img.shields.io/github/v/release/itsbradn/govalo?style=for-the-badge&labelColor=000000">
+	</a>
+	<a aria-label="Valorant API Coverage" href="https://pkg.go.dev/github.com/itsbradn/govalo">
+		<img alt="" src="https://img.shields.io/badge/COVERAGE-6%2F31%20Endpoints-purple?style=for-the-badge&labelColor=%23000000">
+	</a>
+</p>
+
+## ⚡️ Get Started
 
 ```go
-// Login to valorant account using client api
-valapi, err := govalo.Setup("na", USERNAME, PASSWORD)
-if (err != nil) {
-	fmt.Println(err)
-	return
+package main
+
+import (
+	"fmt"
+
+	"github.com/itsbradn/govalo"
+)
+
+func main() {
+	api, err := govalo.Setup("na", USERNAME, PASSWORD)
+
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+
+	userinfo, err := valapi.GetUserInfo()
+
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+
+	fmt.Printf("%s#%s\n", userinfo.Account.GameName, userinfo.Account.TagLine)
 }
+```
 
-userinfo, err := valapi.GetUserInfo()
-if err != nil {
-	fmt.Print(err)
-	return
+## 🎯 Endpoints
+
+### Match History
+
+```go
+func main() {
+	api, err := govalo.Setup("na", USERNAME, PASSWORD)
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+
+	userinfo, err := valapi.GetUserInfo()
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+
+	history, err := valapi.GetMatchHistory("0e5b44a6-3085-545e-afb3-6c296e2c494e", nil)
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+
+	fmt.Printf("Most recent match: %s\n", history.History[0].MatchID)
 }
-
-// Prints user in format GAMENAME#TAGLINE
-fmt.Printf("%s#%s\n", userinfo.Account.GameName, userinfo.Account.TagLine)
-
-// Fetch previous 10 matches
-history, err := valapi.GetMatchHistory("0e5b44a6-3085-545e-afb3-6c296e2c494e", nil)
-if err != nil {
-	fmt.Print(err)
-	return
-}
-
-firstMatch := history.History[0] // Get the most recent match
-
-matchDetails, err := valapi.GetMatchDetails(firstMatch.MatchID)
-if err != nil {
-	fmt.Print(err)
-	return
-}
-
-fmt.Print(matchDetails.MatchInfo)
 ```
