@@ -33,6 +33,12 @@ func (vapi *GoValoAPI) GetMatchDetails(uuid string) (*api.MatchDetailsResponseBo
 	return api.GetMatchDetails(vapi.Region, uuid)
 }
 
+type CompetitiveUpdatesOptions = api.CompetitiveUpdatesOptions
+
+func (vapi *GoValoAPI) GetCompetitiveUpdates(uuid string, options *CompetitiveUpdatesOptions) (*api.CompetitiveUpdatesResponseBody, error) {
+	return api.GetCompetitiveUpdates(vapi.Region, uuid, options)
+}
+
 func Setup(region, username, password string) (*GoValoAPI, error) {
 	platform, err := conf.GetClientPlatformEncoded()
 	if err != nil {

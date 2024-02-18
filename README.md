@@ -13,7 +13,7 @@
 		<img alt="" src="https://img.shields.io/github/v/release/itsbradn/govalo?style=for-the-badge&labelColor=000000">
 	</a>
 	<a aria-label="Valorant API Coverage" href="https://pkg.go.dev/github.com/itsbradn/govalo">
-		<img alt="" src="https://img.shields.io/badge/COVERAGE-6%2F31%20Endpoints-purple?style=for-the-badge&labelColor=%23000000">
+		<img alt="" src="https://img.shields.io/badge/COVERAGE-7%2F31%20Endpoints-purple?style=for-the-badge&labelColor=%23000000">
 	</a>
 </p>
 
@@ -75,5 +75,34 @@ func main() {
 	}
 
 	fmt.Printf("Most recent match: %s\n", history.History[0].MatchID)
+}
+```
+
+### Competitive Updates
+
+```go
+func main() {
+	api, err := govalo.Setup("na", USERNAME, PASSWORD)
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+
+	userinfo, err := valapi.GetUserInfo()
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+
+	competitiveUpdates, err := valapi.GetCompetitiveUpdates(userinfo.PlayerUUID, &govalo.CompetitiveUpdatesOptions{
+		StartIndex: 0
+		EndIndex:   5
+	})
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+
+	fmt.Printf("Most recent competitive update: %s\n", competitiveUpdates.Matches[0])
 }
 ```
