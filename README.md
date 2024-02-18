@@ -65,7 +65,7 @@ func main() {
 		return
 	}
 
-	history, err := valapi.GetMatchHistory("0e5b44a6-3085-545e-afb3-6c296e2c494e", &govalo.MatchHistoryOptions{
+	history, err := valapi.GetMatchHistory(userinfo.PlayerUUID, &govalo.MatchHistoryOptions{
 		StartIndex: 0
 		EndIndex:   5
 	})
