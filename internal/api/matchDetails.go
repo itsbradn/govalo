@@ -218,8 +218,8 @@ type MatchDetailsResponseBody struct {
 	} `json:"kills"`
 }
 
-func GetMatchDetails(region, uuid string) (*MatchDetailsResponseBody, error) {
-	res, err := http.SendRequest("GET", fmt.Sprintf("https://pd.%s.a.pvp.net/match-details/v1/matches/%s", region, uuid), nil)
+func GetMatchDetails(shard, uuid string) (*MatchDetailsResponseBody, error) {
+	res, err := http.SendRequest("GET", fmt.Sprintf("https://pd.%s.a.pvp.net/match-details/v1/matches/%s", shard, uuid), nil)
 	if err != nil {
 		return nil, err
 	}

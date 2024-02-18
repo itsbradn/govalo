@@ -27,8 +27,8 @@ type MatchHistoryOptions struct {
 	Queue      string
 }
 
-func GetMatchHistory(region, puuid string, options *MatchHistoryOptions) (*MatchHistoryResponseBody, error) {
-	uri := fmt.Sprintf("https://pd.%v.a.pvp.net/match-history/v1/history/%v", region, puuid)
+func GetMatchHistory(shard, puuid string, options *MatchHistoryOptions) (*MatchHistoryResponseBody, error) {
+	uri := fmt.Sprintf("https://pd.%v.a.pvp.net/match-history/v1/history/%v", shard, puuid)
 	params := url.Values{}
 
 	if options != nil {

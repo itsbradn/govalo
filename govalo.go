@@ -6,8 +6,45 @@ import (
 	"github.com/itsbradn/govalo/pkg/conf"
 )
 
+const (
+	VALORANT_REGION_NA    string = "na"
+	VALORANT_REGION_LATAM string = "latam"
+	VALORANT_REGION_BR    string = "br"
+	VALORANT_REGION_EU    string = "eu"
+	VALORANT_REGION_AP    string = "ap"
+	VALORANT_REGION_KR    string = "kr"
+)
+
+const (
+	VALORANT_SHARD_NA  string = "na"
+	VALORANT_SHARD_PBE string = "pbe"
+	VALORANT_SHARD_EU  string = "eu"
+	VALORANT_SHARD_AP  string = "ap"
+	VALORANT_SHARD_KR  string = "kr"
+)
+
+func regionToShard(region string) string {
+	switch region {
+	case "na":
+		return VALORANT_SHARD_NA
+	case "latam":
+		return VALORANT_SHARD_NA
+	case "br":
+		return VALORANT_SHARD_NA
+	case "eu":
+		return VALORANT_SHARD_EU
+	case "ap":
+		return VALORANT_SHARD_AP
+	case "kr":
+		return VALORANT_SHARD_KR
+	default:
+		return VALORANT_SHARD_NA
+	}
+}
+
 type GoValoAPI struct {
 	Region string `json:"region"`
+	Shard  string `json:"shard"`
 	PUUID  string
 }
 
@@ -16,35 +53,35 @@ func (vapi *GoValoAPI) GetUserInfo() (*api.UserInfoResponseBody, error) {
 }
 
 func (vapi *GoValoAPI) GetSelfNameService() (*api.NameServiceResponseBody, error) {
-	return api.GetNameService(vapi.Region, vapi.PUUID)
+	return api.GetNameService(vapi.Shard, vapi.PUUID)
 }
 
 func (vapi *GoValoAPI) GetNameService(uuid string) (*api.NameServiceResponseBody, error) {
-	return api.GetNameService(vapi.Region, uuid)
+	return api.GetNameService(vapi.Shard, uuid)
 }
 
 type MatchHistoryOptions = api.MatchHistoryOptions
 
 func (vapi *GoValoAPI) GetMatchHistory(uuid string, options *MatchHistoryOptions) (*api.MatchHistoryResponseBody, error) {
-	return api.GetMatchHistory(vapi.Region, uuid, options)
+	return api.GetMatchHistory(vapi.Shard, uuid, options)
 }
 
 func (vapi *GoValoAPI) GetMatchDetails(uuid string) (*api.MatchDetailsResponseBody, error) {
-	return api.GetMatchDetails(vapi.Region, uuid)
+	return api.GetMatchDetails(vapi.Shard, uuid)
 }
 
 type CompetitiveUpdatesOptions = api.CompetitiveUpdatesOptions
 
 func (vapi *GoValoAPI) GetCompetitiveUpdates(uuid string, options *CompetitiveUpdatesOptions) (*api.CompetitiveUpdatesResponseBody, error) {
-	return api.GetCompetitiveUpdates(vapi.Region, uuid, options)
+	return api.GetCompetitiveUpdates(vapi.Shard, uuid, options)
 }
 
 func (vapi *GoValoAPI) GetStorefront() (*api.StoreFrontResponseBody, error) {
-	return api.GetStorefront(vapi.Region, vapi.PUUID)
+	return api.GetStorefront(vapi.Shard, vapi.PUUID)
 }
 
 func (vapi *GoValoAPI) GetWallet() (*api.WalletResponseBody, error) {
-	return api.GetWallet(vapi.Region, vapi.PUUID)
+	return api.GetWallet(vapi.Shard, vapi.PUUID)
 }
 
 const (
@@ -59,11 +96,11 @@ const (
 )
 
 func (vapi *GoValoAPI) GetOwnedItems(itemType string) (*api.OwnedItemsResponseBody, error) {
-	return api.GetOwnedItems(vapi.Region, vapi.PUUID, itemType)
+	return api.GetOwnedItems(vapi.Shard, vapi.PUUID, itemType)
 }
 
 func (vapi *GoValoAPI) GetStorePrices() (*api.PricesResponseBody, error) {
-	return api.GetStorePrices(vapi.Region)
+	return api.GetStorePrices(vapi.Shard)
 }
 
 func Setup(region, username, password string) (*GoValoAPI, error) {
@@ -105,5 +142,6 @@ func Setup(region, username, password string) (*GoValoAPI, error) {
 	return &GoValoAPI{
 		PUUID:  userinfo.PlayerUUID,
 		Region: region,
+		Shard:  regionToShard(region),
 	}, nil
 }

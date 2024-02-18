@@ -16,8 +16,8 @@ type NameServiceResponseBody struct {
 	TagLine     string `json:"TagLine"`
 }
 
-func GetNameService(region, subject string) (*NameServiceResponseBody, error) {
-	res, err := http.SendRequest("PUT", fmt.Sprintf("https://pd.%s.a.pvp.net/name-service/v2/players", region), NameServiceRequestBody{subject})
+func GetNameService(shard, subject string) (*NameServiceResponseBody, error) {
+	res, err := http.SendRequest("PUT", fmt.Sprintf("https://pd.%s.a.pvp.net/name-service/v2/players", shard), NameServiceRequestBody{subject})
 	if err != nil {
 		return nil, err
 	}
