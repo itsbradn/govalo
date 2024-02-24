@@ -107,6 +107,12 @@ func (vapi *GoValoAPI) GetStorePrices() (*api.PricesResponseBody, error) {
 	return api.GetStorePrices(vapi.Shard)
 }
 
+type LeaderboardOptions = api.LeaderboardOptions
+
+func (vapi *GoValoAPI) GetLeaderboard(shard, seasonID string, options *LeaderboardOptions) (*api.LeaderboardResponseBody, error) {
+	return api.GetLeaderboard(shard, seasonID, options)
+}
+
 func Setup(region, username, password string) (*GoValoAPI, error) {
 	platform, err := conf.GetClientPlatformEncoded()
 	if err != nil {
