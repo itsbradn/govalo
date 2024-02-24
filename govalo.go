@@ -84,6 +84,10 @@ func (vapi *GoValoAPI) GetWallet() (*api.WalletResponseBody, error) {
 	return api.GetWallet(vapi.Shard, vapi.PUUID)
 }
 
+func (vapi *GoValoAPI) GetAccountXP() (*api.AccountExperienceResponseBody, error) {
+	return api.GetAccountXP(vapi.Shard, vapi.PUUID)
+}
+
 const (
 	OWNED_ITEM_TYPE_AGENTS        string = "01bb38e1-da47-4e6a-9b3d-945fe4655707"
 	OWNED_ITEM_TYPE_CONTRACTS     string = "f85cb6f7-33e5-4dc8-b609-ec7212301948"
