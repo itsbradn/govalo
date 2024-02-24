@@ -124,7 +124,7 @@ type StoreFrontResponseBody struct {
 			Offer struct {
 				OfferID          string            `json:"OfferID"`
 				IsDirectPurchase bool              `json:"IsDirectPurchase"`
-				StartDate        string            `json:"StartDate"` // ISO 1806 Date
+				StartDate        string            `json:"StartDate"` // ISO 8601 Date
 				Cost             map[string]uint32 `json:"Cost"`
 				Rewards          []struct {
 					ItemTypeID string `json:"ItemTypeID"`
@@ -143,7 +143,7 @@ type StoreFrontResponseBody struct {
 			Offer        struct {
 				OfferID          string            `json:"OfferID"`
 				IsDirectPurchase bool              `json:"IsDirectPurchase"`
-				StartDate        string            `json:"StartDate"` // ISO 1806 Date
+				StartDate        string            `json:"StartDate"` // ISO 8601 Date
 				Cost             map[string]uint32 `json:"Cost"`
 				Rewards          []struct {
 					ItemTypeID string `json:"ItemTypeID"`
