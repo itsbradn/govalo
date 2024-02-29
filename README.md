@@ -13,7 +13,7 @@
 		<img alt="" src="https://img.shields.io/github/v/release/itsbradn/govalo?style=for-the-badge&labelColor=000000">
 	</a>
 	<a aria-label="Valorant API Coverage" href="https://pkg.go.dev/github.com/itsbradn/govalo">
-		<img alt="" src="https://img.shields.io/badge/COVERAGE-11%2F31%20Endpoints-purple?style=for-the-badge&labelColor=%23000000">
+		<img alt="" src="https://img.shields.io/badge/COVERAGE-13%2F31%20Endpoints-purple?style=for-the-badge&labelColor=%23000000">
 	</a>
 </p>
 
