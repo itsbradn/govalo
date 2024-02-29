@@ -8,27 +8,27 @@ import (
 )
 
 type PlayerLoadoutResponseBody struct {
-	PUUID string `json:"Subject"`
+	PUUID   string `json:"Subject"`
 	Version uint16 `json:"Version"`
-	Guns []struct{
-		ID string `json:"ID"`
+	Guns    []struct {
+		ID              string `json:"ID"`
 		CharmInstanceID string `json:"CharmInstanceID"`
-		CharmID string `json:"CharmID"`
-		CharmLevelID string `json:"CharmLevelID"`
-		SkinID string `json:"SkinID"`
-		SkinLevelID string `json:"SkinLevelID"`
-		ChromaID string `json:"ChromaID"`
+		CharmID         string `json:"CharmID"`
+		CharmLevelID    string `json:"CharmLevelID"`
+		SkinID          string `json:"SkinID"`
+		SkinLevelID     string `json:"SkinLevelID"`
+		ChromaID        string `json:"ChromaID"`
 	} `json:"Guns"`
-	Sprays []struct{
+	Sprays []struct {
 		EquipSlotID string `json:"EquipSlotID"`
-		SprayID string `json:"SprayID"`
+		SprayID     string `json:"SprayID"`
 	} `json:"Sprays"`
-	Identity struct{
-		PlayerCardID string `json:"PlayerCardID"`
-		PlayerTitleID string `json:"PlayerTitleID"`
-		AccountLevel uint32 `json:"AccountLevel"`
+	Identity struct {
+		PlayerCardID           string `json:"PlayerCardID"`
+		PlayerTitleID          string `json:"PlayerTitleID"`
+		AccountLevel           uint32 `json:"AccountLevel"`
 		PreferredLevelBorderID string `json:"PreferredLevelBorderID"`
-		HideAccountLevel bool `json:"HideAccountLevel"`
+		HideAccountLevel       bool   `json:"HideAccountLevel"`
 	} `json:"Identity"`
 	Incognito bool `json:"Incognito"`
 }

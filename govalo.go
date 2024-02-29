@@ -117,6 +117,10 @@ func (vapi *GoValoAPI) GetPlayerLoadout() (*api.PlayerLoadoutResponseBody, error
 	return api.GetPlayerLoadout(vapi.Shard, vapi.PUUID)
 }
 
+func (vapi *GoValoAPI) GetPlayerMMR(puuid string) (*api.PlayerMMRResponseBody, error) {
+	return api.GetPlayerMMR(vapi.Shard, puuid)
+}
+
 func Setup(region, username, password string) (*GoValoAPI, error) {
 	platform, err := conf.GetClientPlatformEncoded()
 	if err != nil {
